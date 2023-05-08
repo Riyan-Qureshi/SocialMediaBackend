@@ -1,5 +1,6 @@
 import Blog from '../model/Blog'
 import User from '../model/User'
+import mongoose from 'mongoose'
 
 export const getAllBlogs = async(req, res, next) => {
     let blogs;
@@ -11,10 +12,10 @@ export const getAllBlogs = async(req, res, next) => {
     if(!blogs) {
         return res.status(404).json({message: "No Blogs Found"});
     }
-    return res.status(200).json(blogs);
+    return res.status(200).json({blogs});
 }
 
-export const addBlog = async() => {
+export const addBlog = async(req, res, next) => {
     const {title, description, image, user} = req.body;
 
     let existingUser;
